@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="employee" class="com.edureka.di.inheritance.Employee" abstract="true">
+        <constructor-arg name="id" value="23"/>
+        <constructor-arg name="age" value=" 33"/>
+        <constructor-arg name="name" value="Pradeep"/>
+    </bean>
+
+    <bean id="regularEmployee" class="com.edureka.di.inheritance.RegularEmployee" parent="employee">
+        <property name="leave" value="20"/>
+        <property name="salary" value="200000"/>
+    </bean>
+
+    <bean id="contractEmployee" class="com.edureka.di.inheritance.ContractEmployee" parent="employee">
+        <property name="duration" value="180"/>
+        <property name="pricePerDay" value="12000"/>
+    </bean>
+
+    <bean id="student1" class="com.edureka.di.innerBeans.Student">
+        <constructor-arg name="id" value="23"/>
+        <constructor-arg name="name" value="Praveen"/>
+        <constructor-arg name="grade" value="10"/>
+        <property name="studentMapper">
+            <bean id="studentMapper" class="com.edureka.di.innerBeans.Student$StudentMapper">
+            </bean>
+        </property>
+    </bean>
+</beans>

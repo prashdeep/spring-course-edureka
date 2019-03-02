@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-init-method="initialize" default-destroy-method="destroy">
+    <!-- Import other configuration file-->
+    <!--<import resource="bean-inheritance.xml"/> -->
+    <import resource="beans-autowire.xml" />
+
+    <bean id="customer" class="com.edureka.di.Customer" lazy-init="true" >
+        <!--<property name="driver">
+            <idref bean ="driver"/>
+        </property> -->
+        <property name="age" value="32"/>
+        <constructor-arg value="Hari" />
+        <property name="nickNames">
+            <set>
+                <value>Vinay</value>
+                <value>Vinu</value>
+                <value>Mr Cool</value>
+                <value>vins</value>
+            </set>
+        </property>
+        <property name="addressList">
+            <list>
+                <ref bean="address1"/>
+                <ref bean="address2"/>
+                <ref bean="address3"/>
+            </list>
+        </property>
+        <property name="addressMap">
+            <map>
+                <entry key="1" value-ref="address1"/>
+                <entry key="2" value-ref="address2"/>
+                <entry key="3" value-ref="address3"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="driver" class="com.edureka.di.Driver">
+        <constructor-arg value="Vishnu" />
+    </bean>
+
+    <bean id="address1" class="com.edureka.di.Address">
+        <property name="city" value="Bangalore"/>
+        <property name="state" value="Karnataka"/>
+        <property name="zip" value="577142"/>
+    </bean>
+    <bean id="address2" class="com.edureka.di.Address">
+        <property name="city" value="Mangalore"/>
+        <property name="state" value="Karnataka"/>
+        <property name="zip" value="577152"/>
+    </bean>
+    <bean id="address3" class="com.edureka.di.Address">
+        <property name="city" value="Hubli"/>
+        <property name="state" value="Karnataka"/>
+        <property name="zip" value="577242"/>
+    </bean>
+    <alias name="address1" alias="address"/>
+</beans>
