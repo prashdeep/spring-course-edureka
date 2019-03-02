@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-        default-init-method="initialize" default-destroy-method="destroy">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-init-method="initialize" default-destroy-method="destroy">
+
+    <bean id="spel" class="com.edureka.di.module2.autowire.Spel">
+        <property name="value" value="#{systemProperties['app.name']}"/>
+    </bean>
+    <context:component-scan base-package="com.edureka.di.module2.autowire.componentscanning"/>
     <!-- Import other configuration file-->
     <!--<import resource="bean-inheritance.xml"/> -->
     <import resource="beans-autowire.xml" />
-
+    <import resource="coding-interfaces.xml"/>
     <bean id="customer" class="com.edureka.di.Customer" lazy-init="true" >
         <!--<property name="driver">
             <idref bean ="driver"/>
@@ -56,4 +62,6 @@
         <property name="zip" value="577242"/>
     </bean>
     <alias name="address1" alias="address"/>
+
+    <!--<bean class="com.edureka.di.module2.autowire.beanPostProcessor.GenericInitBeanPostProcessor"/>-->
 </beans>
